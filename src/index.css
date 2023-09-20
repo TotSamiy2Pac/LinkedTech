@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Hind Siliguri', sans-serif;
+}
+
+.container {
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+p {
+    color: #030D15;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px; /* 150% */
+    opacity: 0.6;
+}
