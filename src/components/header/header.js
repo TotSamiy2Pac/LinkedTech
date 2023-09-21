@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import {Box, Button, Link, Modal} from "@mui/material";
 import './style.scss'
 import {useDispatch, useSelector} from "react-redux";
-import {CLOSE, OPEN} from "../../redux/types/types";
+import {CLOSE, DELETE_CART, OPEN} from "../../redux/types/types";
 
 const style = {
     position: 'absolute',
@@ -22,6 +22,12 @@ const Header = () => {
 
     const handleOpen = () => dispatch({type: OPEN});
     const handleClose = () => dispatch({type: CLOSE});
+
+
+    const handleDeleteCart = (product) => () => {
+        dispatch({type: DELETE_CART, payload: product})
+    }
+
     return (
         <header>
             <div className="container">
@@ -84,7 +90,10 @@ const Header = () => {
                             aria-describedby="modal-modal-description"
                         >
                             <Box sx={style}>
-                                <h3>Корзина</h3>
+                                <div className={'cart-header'}>
+                                    <h3>Корзина</h3>
+                                    <Button onClick={handleClose} color={'error'} variant={'contained'}>x</Button>
+                                </div>
                                 {
                                     carts.map(product => {
                                         return (
@@ -98,6 +107,13 @@ const Header = () => {
                                                     <div className="__price">
                                                         <label>${product.price - (product.price * product.discountPercentage / 100).toFixed(0)}</label>
                                                         <label className={'__discount'}>${product.price}</label>
+                                                        <Button
+                                                            color={'error'}
+                                                            variant={'contained'}
+                                                            onClick={handleDeleteCart(product)}
+                                                        >
+                                                            Удалить
+                                                        </Button>
                                                     </div>
                                                 </div>
                                             </div>
